@@ -96,6 +96,7 @@ namespace SignBrowser
             this.AddDBButton.TabIndex = 6;
             this.AddDBButton.Text = "Add";
             this.AddDBButton.UseVisualStyleBackColor = true;
+            this.AddDBButton.Click += new System.EventHandler(this.AddDBButton_Click);
             // 
             // AddWindow
             // 
