@@ -37,6 +37,22 @@ namespace SignLogic
             }
         }
 
+        public void SaveAllButtonsToFile()
+        {
+            File.Delete(this.FullFilePath);
+            foreach (var button in this.Entries)
+            {
+                this.SaveButtonToFile(button);
+            }
+        }
+
+        public void MakeButton(string buttonSign, string buttonDesc)
+        {
+            var button = new FullButton(buttonSign, buttonDesc);
+            this.Entries.Add(button);
+            this.SaveButtonToFile(button);
+        }
+
         public void SaveButtonToFile(FullButton button)
         {
             var fStream = File.Open(this.FullFilePath, FileMode.Open);
