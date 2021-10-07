@@ -8,12 +8,29 @@ using System.Threading.Tasks;
 
 namespace SignLogic
 {
+    /// <summary>
+    /// This class takes care of asynchronous access to the save file with all previously created buttons.
+    /// It takes care of opening, reading and writing to the file and also carries the list with all Buttons in memory.
+    /// </summary>
     public static class FileAccess
     {
+        /// <summary>
+        /// List of button entries.
+        /// </summary>
         public static List<FullButton> Entries = new List<FullButton>();
 
+        /// <summary>
+        /// Gets the full file path.
+        /// </summary>
+        /// <value>
+        /// The full file path.
+        /// </value>
         public static string FullFilePath { get; private set; }
 
+        /// <summary>
+        /// Writes the file.
+        /// </summary>
+        /// <returns>String to write.</returns>
         public static string WriteFile()
         {
             // entry looks like this: id,sign,description[endline]
@@ -25,12 +42,23 @@ namespace SignLogic
             return str;
         }
 
+        /// <summary>
+        /// Adds the button to the internal Button list.
+        /// </summary>
+        /// <param name="buttonSign">The button sign.</param>
+        /// <param name="buttonDesc">The button desc.</param>
         public static void MakeButton(string buttonSign, string buttonDesc)
         {
             var button = new FullButton(buttonSign, buttonDesc);
             FileAccess.Entries.Add(button);
         }
 
+        /// <summary>
+        /// Accesses the file and either reads all buttons saved or writes all buttons currently in the system to the file.
+        /// This usually happens at the start and end of the application cycle.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="forRead">if set to <c>true</c> [for read], if <c>false</c> then for [write].</param>
         public static void AccessFile(string fileName, bool forRead)
         {
             // i.e. \bin\Debug - where the binary is loaded from
@@ -69,6 +97,11 @@ namespace SignLogic
             }
         }
 
+        /// <summary>
+        /// Reads the file contents.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <exception cref="System.Exception">Error in the saving file!</exception>
         private static void ReadFile(string str)
         {
             // entry looks like this: id,sign,description[endline]
