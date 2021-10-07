@@ -112,6 +112,7 @@ namespace SignBrowser
             this.Controls.Add(this.IdLabel);
             this.Name = "AddWindow";
             this.Text = "Add button";
+            this.Load += new System.EventHandler(this.AddWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

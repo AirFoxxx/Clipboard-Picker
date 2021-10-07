@@ -95,7 +95,7 @@ namespace SignBrowser
             this.UndertextLabel.TabIndex = 4;
             this.UndertextLabel.Text = "© Copyright Andrew Coachman 2021, all rights included";
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,8 +106,8 @@ namespace SignBrowser
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.HeaderLabel);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainWindow";
+            this.Text = "Sign library";
             this.ResumeLayout(false);
             this.PerformLayout();
 

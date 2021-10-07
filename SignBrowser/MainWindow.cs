@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SignLogic;
 
 namespace SignBrowser
 {
@@ -23,6 +24,8 @@ namespace SignBrowser
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            var addWindow = new AddWindow();
+            addWindow.Show();
         }
     }
 }

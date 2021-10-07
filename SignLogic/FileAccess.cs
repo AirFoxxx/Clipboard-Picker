@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,57 +11,75 @@ namespace SignLogic
     public static class FileAccess
     {
         public static List<FullButton> Entries = new List<FullButton>();
+
         public static string FullFilePath { get; private set; }
 
-        public static void SaveAllButtonsToFile()
+        public static string WriteFile()
         {
-            File.Delete(FileAccess.FullFilePath);
+            // entry looks like this: id,sign,description[endline]
+            var str = String.Empty;
             foreach (var button in FileAccess.Entries)
             {
-                FileAccess.SaveButtonToFile(button);
+                str = str + $"{button.Id}\r{button.Sign}\r{button.Description}\n";
             }
+            return str;
         }
 
         public static void MakeButton(string buttonSign, string buttonDesc)
         {
             var button = new FullButton(buttonSign, buttonDesc);
             FileAccess.Entries.Add(button);
-            FileAccess.SaveButtonToFile(button);
         }
 
-        public static void Initialize(string fileName)
+        public static void AccessFile(string fileName, bool forRead)
         {
             // i.e. \bin\Debug - where the binary is loaded from
             string workingDirectory = Environment.CurrentDirectory;
             FileAccess.FullFilePath = $"{ workingDirectory }\\{fileName}";
 
-            FileAccess.ReadFile();
+            string str = string.Empty;
+            using (MemoryMappedFile Mmf = MemoryMappedFile.CreateFromFile(FullFilePath, FileMode.OpenOrCreate, "myFileMap", 10000))
+            {
+                using (MemoryMappedViewAccessor reader = Mmf.CreateViewAccessor())
+                {
+                    if (forRead) // Read operation
+                    {
+                        var bytes = new byte[reader.Capacity];
+                        reader.ReadArray<byte>(0, bytes, 0, bytes.Length);
+                        str = System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                        str = str.Trim('\0');
+                        // System.Diagnostics.Debug.Write(str);
+
+                        if (str.Length == 0)
+                            return;
+
+                        FileAccess.ReadFile(str);
+                    }
+                    else // Write operation
+                    {
+                        str = FileAccess.WriteFile();
+
+                        if (str.Length == 0)
+                            return;
+
+                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
+                        reader.WriteArray<byte>(0, buffer, 0, buffer.Length);
+                    }
+                }
+            }
         }
 
-        private static void SaveButtonToFile(FullButton button)
+        private static void ReadFile(string str)
         {
-            var fStream = File.Open(FileAccess.FullFilePath, FileMode.Open);
-
-            if (!fStream.CanWrite)
-                throw new Exception($"File located at: {FileAccess.FullFilePath} cannot be written to!");
-
-            string stringToWrite = $"{button.Id},{button.Sign},{button.Description}\n";
-
-            fStream.Write(Encoding.ASCII.GetBytes(stringToWrite), 0, stringToWrite.Length);
-        }
-
-        private static void ReadFile()
-        {
-            var fStream = File.Open(FileAccess.FullFilePath, FileMode.OpenOrCreate);
-
-            if (!fStream.CanRead)
-                throw new Exception($"File located at: {FileAccess.FullFilePath} failed to open");
-
             // entry looks like this: id,sign,description[endline]
-            var buttonsList = fStream.ToString().Split(new char[] { '\r', '\n' }).ToList();
+            var buttonsList = str.Split(new char[] { '\n' }).ToList();
+
             foreach (var button in buttonsList)
             {
-                var buttonStrings = button.Split(',').ToList();
+                if (button == string.Empty)
+                    continue;
+
+                var buttonStrings = button.Split('\r').ToList();
 
                 if (buttonStrings.Count() != 3)
                     throw new Exception("Error in the saving file!");
@@ -71,6 +90,7 @@ namespace SignLogic
                 newButton.Description = buttonStrings[2];
 
                 FileAccess.Entries.Add(newButton);
+                FullButton.IdCounter = ++newButton.Id;
             }
         }
     }

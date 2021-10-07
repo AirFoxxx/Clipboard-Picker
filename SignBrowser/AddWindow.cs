@@ -54,5 +54,10 @@ namespace SignBrowser
             }
             return check;
         }
+
+        private void AddWindow_Load(object sender, EventArgs e)
+        {
+            this.TopMost = true;
+        }
     }
 }
