@@ -45,6 +45,7 @@ namespace SignBrowser
             bool check = true;
             if (this.SignTextbox.Text == string.Empty || this.SignTextbox.Text.Length > 1)
             {
+                MessageBox.Show("Sign can only contain one character! Use the other components to add multi character phrases.");
                 check = false;
             }
 

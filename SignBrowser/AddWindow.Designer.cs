@@ -67,11 +67,13 @@ namespace SignBrowser
             // 
             // IdTextbox
             // 
+            this.IdTextbox.Enabled = false;
             this.IdTextbox.Location = new System.Drawing.Point(147, 13);
             this.IdTextbox.Name = "IdTextbox";
             this.IdTextbox.ReadOnly = true;
             this.IdTextbox.Size = new System.Drawing.Size(40, 23);
             this.IdTextbox.TabIndex = 3;
+            this.IdTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.IdTextbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // SignTextbox
@@ -80,6 +82,7 @@ namespace SignBrowser
             this.SignTextbox.Name = "SignTextbox";
             this.SignTextbox.Size = new System.Drawing.Size(40, 23);
             this.SignTextbox.TabIndex = 4;
+            this.SignTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // DescriptionTextbox
             // 
