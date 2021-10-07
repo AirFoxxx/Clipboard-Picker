@@ -15,11 +15,12 @@ namespace SignBrowser
         [STAThread]
         private static void Main()
         {
-            FileAccess.AccessFile("Entries.txt", true);
-
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            FileAccess.AccessFile("Entries.txt", true);
+
             Application.Run(new MainWindow());
             FileAccess.AccessFile("Entries.txt", false);
         }

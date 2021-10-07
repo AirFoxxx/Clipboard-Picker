@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SignLogic
 {
@@ -16,12 +17,12 @@ namespace SignLogic
         /// </summary>
         public static int IdCounter = 1;
 
+        public Button GraphicsButton;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FullButton"/> class.
         /// </summary>
-        public FullButton()
-        {
-        }
+        public FullButton() : this("", "") { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FullButton"/> class.
@@ -33,6 +34,8 @@ namespace SignLogic
             this.Id = IdCounter++;
             this.Sign = buttonSign;
             this.Description = buttonDesc;
+
+            this.GraphicsButton = new Button();
         }
 
         /// <summary>

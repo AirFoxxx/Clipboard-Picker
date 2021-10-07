@@ -16,6 +16,17 @@ namespace SignBrowser
         public MainWindow()
         {
             InitializeComponent();
+            int x = 0;
+            int y = 0;
+            FileAccess.Entries.ForEach(
+                entry =>
+                {
+                    entry.GraphicsButton.Location = new Point(x, y);
+                    //entry.GraphicsButton.Text = entry.Sign;
+                    this.MainPanel.Controls.Add(entry.GraphicsButton);
+                    x += 50;
+                    y += 50;
+                });
         }
 
         private void label1_Click(object sender, EventArgs e)

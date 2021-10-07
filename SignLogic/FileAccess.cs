@@ -110,7 +110,13 @@ namespace SignLogic
             foreach (var button in buttonsList)
             {
                 if (button == string.Empty)
+                {
+                    if (FileAccess.Entries.Count == 0)
+                    {
+                        FullButton.IdCounter = 1;
+                    }
                     continue;
+                }
 
                 var buttonStrings = button.Split('\r').ToList();
 
