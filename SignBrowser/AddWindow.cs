@@ -60,5 +60,9 @@ namespace SignBrowser
         {
             this.TopMost = true;
         }
+
+        private void AddWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+        }
     }
 }

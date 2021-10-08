@@ -59,6 +59,7 @@ namespace SignBrowser
             // 
             // MainPanel
             // 
+            this.MainPanel.AutoSize = true;
             this.MainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MainPanel.Location = new System.Drawing.Point(10, 75);
             this.MainPanel.Name = "MainPanel";
