@@ -102,9 +102,10 @@ namespace SignBrowser
         {
             var addWindow = new AddWindow();
             //TODO: Add positioning to the window to open it on top of this one.
+            addWindow.StartPosition = FormStartPosition.CenterParent;
             this.Enabled = false;
             addWindow.FormClosed += (o, e) => { this.Focus(); this.Enabled = true; this.RedrawPanel(); };
-            addWindow.Show();
+            addWindow.ShowDialog();
         }
     }
 }

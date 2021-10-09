@@ -15,7 +15,7 @@ namespace SignLogic
         /// <summary>
         /// The identifier counter. Starts at one.
         /// </summary>
-        public static int IdCounter = 1; //TODO: fix the counter
+        public static int IdCounter = 1; //TODO: fix the counter, after reloading the ID increases by one
 
         public Button GraphicsButton;
 
