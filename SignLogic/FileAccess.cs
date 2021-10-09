@@ -129,7 +129,7 @@ namespace SignLogic
                 newButton.Description = buttonStrings[2];
 
                 FileAccess.Entries.Add(newButton);
-                FullButton.IdCounter = ++newButton.Id;
+                FullButton.IdCounter = newButton.Id + 1;
             }
         }
     }
