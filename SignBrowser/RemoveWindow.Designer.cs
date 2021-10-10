@@ -56,9 +56,9 @@ namespace SignBrowser
             this.RecursiveCheckbox.AutoSize = true;
             this.RecursiveCheckbox.Location = new System.Drawing.Point(42, 49);
             this.RecursiveCheckbox.Name = "RecursiveCheckbox";
-            this.RecursiveCheckbox.Size = new System.Drawing.Size(128, 19);
+            this.RecursiveCheckbox.Size = new System.Drawing.Size(147, 19);
             this.RecursiveCheckbox.TabIndex = 2;
-            this.RecursiveCheckbox.Text = "Remove recursively";
+            this.RecursiveCheckbox.Text = "Remove all occurences";
             this.RecursiveCheckbox.UseVisualStyleBackColor = true;
             // 
             // RemoveButton
