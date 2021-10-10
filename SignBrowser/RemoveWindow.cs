@@ -27,6 +27,9 @@ namespace SignBrowser
                 {
                     if (FileAccess.Entries[i].Sign == this.SignTextbox.Text)
                     {
+                        // For now we hide the button and on hte next system start it will be gone
+                        var buttonToRemove = FileAccess.Entries[i];
+                        buttonToRemove.GraphicsButton.Hide();
                         FileAccess.Entries.RemoveAt(i);
                         break;
                     }
@@ -35,6 +38,9 @@ namespace SignBrowser
                 {
                     if (FileAccess.Entries[i].Sign == this.SignTextbox.Text)
                     {
+                        // For now we hide the button and on hte next system start it will be gone
+                        var buttonToRemove = FileAccess.Entries[i];
+                        buttonToRemove.GraphicsButton.Hide();
                         FileAccess.Entries.RemoveAt(i);
                     }
                 }

@@ -44,6 +44,11 @@ namespace SignLogic
         }
 
         /// <summary>
+        /// Called when the button is being deleted from the form;
+        /// </summary>
+        public delegate void onDeleted();
+
+        /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>

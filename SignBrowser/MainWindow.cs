@@ -34,16 +34,6 @@ namespace SignBrowser
             MainWindow.Offset = this.OffsetTrackbar.Value;
             this.OffsetLabel.Text = "Offset: " + MainWindow.Offset.ToString();
 
-            // What happens when button is clicked:
-            FileAccess.Entries.ForEach(entry => entry.GraphicsButton.Click += (o, e) =>
-            {
-                this.DescriptionTextbox.Text = "Selected sign: " +
-                entry.Sign + " \n" +
-                "Description: \n" +
-                entry.Description;
-                System.Windows.Forms.Clipboard.SetText(entry.Sign);
-            });
-
             this.RedrawPanel();
         }
 
@@ -73,6 +63,16 @@ namespace SignBrowser
 
         public void RedrawPanel()
         {
+            // What happens when button is clicked:
+            FileAccess.Entries.ForEach(entry => entry.GraphicsButton.Click += (o, e) =>
+            {
+                this.DescriptionTextbox.Text = "Selected sign: " +
+                entry.Sign + " \n" +
+                "Description: \n" +
+                entry.Description;
+                System.Windows.Forms.Clipboard.SetText(entry.Sign);
+            });
+
             FileAccess.Entries = FileAccess.Entries.OrderBy(entry => entry.Id).ToList();
 
             var panelBorders = new PanelBorders();
@@ -168,6 +168,15 @@ namespace SignBrowser
             MainWindow.Offset = this.OffsetTrackbar.Value;
             this.OffsetLabel.Text = "Offset: " + MainWindow.Offset.ToString();
             this.RedrawPanel();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var removeWindow = new RemoveWindow();
+            removeWindow.StartPosition = FormStartPosition.CenterParent;
+            this.Enabled = false;
+            removeWindow.FormClosed += (o, e) => { this.Focus(); this.Enabled = true; this.RedrawPanel(); };
+            removeWindow.ShowDialog();
         }
 
         public struct PanelBorders
