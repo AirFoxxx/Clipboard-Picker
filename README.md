@@ -8,23 +8,28 @@ The special character gets copied into your clipboard when you click on the butt
 ## The Interface
 
 <p>
-    <img src="image1.PNG" width="220" height="240" />
+    <img src="image1.PNG" width="550" />
 </p>
 
 The buttons can be resized in many ways with the sliders to create the right conditions to copy easily.
 
-
-![image](image5.PNG)
+<p>
+    <img src="image5.PNG" width="400" />
+</p>
 
 A simple add window allows for custom creation of character buttons to copy from.
 - Button description can be added and then viewed on the bottom right.
 
-![image](image8.png)
+<p>
+    <img src="image8.PNG" width="400" />
+</p>
 
 It is possible to delete any existing button from the interface with the help of this window.
 - The 'Remove all occurences' checkbox removes duplicates of the same sign.
 
-![image](image12.png)
+<p>
+    <img src="image12.PNG" width="300" />
+</p>
 
 ## Planned updates
 - Adding a feature to copy whole texts.
