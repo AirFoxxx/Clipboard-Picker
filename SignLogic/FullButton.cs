@@ -12,7 +12,6 @@ namespace SignLogic
     /// <summary>
     /// Class represents one Button on the grid.
     /// </summary>
-
     public class FullButton
     {
         /// <summary>
@@ -52,7 +51,6 @@ namespace SignLogic
         /// <value>
         /// The identifier.
         /// </value>
-
         public int Id { get; set; }
 
         /// <summary>
@@ -61,7 +59,6 @@ namespace SignLogic
         /// <value>
         /// The sign.
         /// </value>
-
         public string Sign { get; set; }
 
         /// <summary>
@@ -70,7 +67,6 @@ namespace SignLogic
         /// <value>
         /// The description.
         /// </value>
-
         public string Description { get; set; }
     }
 }
