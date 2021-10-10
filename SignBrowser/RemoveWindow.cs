@@ -25,13 +25,18 @@ namespace SignBrowser
             {
                 if (!this.RecursiveCheckbox.Checked)
                 {
-                    FileAccess.Entries.RemoveAt(i);
-
-                    break;
+                    if (FileAccess.Entries[i].Sign == this.SignTextbox.Text)
+                    {
+                        FileAccess.Entries.RemoveAt(i);
+                        break;
+                    }
                 }
                 else
                 {
-                    FileAccess.Entries.RemoveAt(i);
+                    if (FileAccess.Entries[i].Sign == this.SignTextbox.Text)
+                    {
+                        FileAccess.Entries.RemoveAt(i);
+                    }
                 }
             }
 
