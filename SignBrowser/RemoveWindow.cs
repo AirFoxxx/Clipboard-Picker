@@ -20,6 +20,10 @@ namespace SignBrowser
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
+            if (!this.validateWindow())
+            {
+                return;
+            }
             int countStart = FileAccess.Entries.Count;
             for (int i = FileAccess.Entries.Count - 1; i >= 0; i--)
             {
@@ -56,7 +60,20 @@ namespace SignBrowser
                 MessageBox.Show(
                 "Successfully deleted " + (countStart - FileAccess.Entries.Count) +
                 " Button/s.");
+                this.SignTextbox.Text = string.Empty;
+                this.RecursiveCheckbox.Checked = false;
             }
+        }
+
+        private bool validateWindow()
+        {
+            bool check = true;
+            if (this.SignTextbox.Text == string.Empty || this.SignTextbox.Text.Length > 1)
+            {
+                MessageBox.Show("Sign can only contain one character! Use the other components to add multi character phrases.");
+                check = false;
+            }
+            return check;
         }
     }
 }
