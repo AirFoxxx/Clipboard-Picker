@@ -170,11 +170,11 @@ namespace SignBrowser
             // 
             // DescriptionTextbox
             // 
-            this.DescriptionTextbox.Location = new System.Drawing.Point(426, 284);
+            this.DescriptionTextbox.Location = new System.Drawing.Point(426, 298);
             this.DescriptionTextbox.Multiline = true;
             this.DescriptionTextbox.Name = "DescriptionTextbox";
             this.DescriptionTextbox.ReadOnly = true;
-            this.DescriptionTextbox.Size = new System.Drawing.Size(104, 241);
+            this.DescriptionTextbox.Size = new System.Drawing.Size(104, 227);
             this.DescriptionTextbox.TabIndex = 7;
             // 
             // MainWindow

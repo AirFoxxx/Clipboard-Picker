@@ -41,6 +41,7 @@ namespace SignBrowser
                 entry.Sign + " \n" +
                 "Description: \n" +
                 entry.Description;
+                System.Windows.Forms.Clipboard.SetText(entry.Sign);
             });
 
             this.RedrawPanel();
