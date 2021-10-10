@@ -8,13 +8,13 @@ The special character gets copied into your clipboard when you click on the butt
 ## The Interface
 
 <p>
-    <img src="image1.png" width="220" height="240" />
+    <img src="image1.PNG" width="220" height="240" />
 </p>
 
 The buttons can be resized in many ways with the sliders to create the right conditions to copy easily.
 
 
-![image](image5.png)
+![image](image5.PNG)
 
 A simple add window allows for custom creation of character buttons to copy from.
 - Button description can be added and then viewed on the bottom right.
