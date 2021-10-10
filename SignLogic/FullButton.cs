@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,13 @@ namespace SignLogic
         /// <summary>
         /// The identifier counter. Starts at one.
         /// </summary>
-        public static int IdCounter = 1; //TODO: fix the counter, after reloading the ID increases by one
+        public static int IdCounter = 1;
 
         public Button GraphicsButton;
+
+        public Point locationStart;
+
+        public Point locationEnd;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FullButton"/> class.

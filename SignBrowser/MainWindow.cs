@@ -15,13 +15,20 @@ namespace SignBrowser
     {
         public MainWindow()
         {
-            //TODO: Add these scalings as buttons
             //TODO: Add button description somewhere on the form (with lambdas if that works?)
-            //TODO: Add proper window resizing feature and scale all elements (google this?)
             InitializeComponent();
-            MainWindow.Scaling = 2.0F;
-            MainWindow.Ratio = 1F;
-            MainWindow.Offset = 5;
+
+            this.ScalingTrackbar.Value = 30;
+            MainWindow.Scaling = this.ScalingTrackbar.Value / 10;
+            this.ScalingLabel.Text = "Scaling: " + MainWindow.Scaling.ToString();
+
+            this.RatioTrackbar.Value = 15;
+            MainWindow.Ratio = this.RatioTrackbar.Value / 10;
+            this.RatioLabel.Text = "Ratio: " + MainWindow.Ratio.ToString();
+
+            this.OffsetTrackbar.Value = 5;
+            MainWindow.Offset = this.OffsetTrackbar.Value;
+            this.OffsetLabel.Text = "Offset: " + MainWindow.Offset.ToString();
 
             this.RedrawPanel();
         }
@@ -52,45 +59,66 @@ namespace SignBrowser
 
         public void RedrawPanel()
         {
-            int panelWidth = this.MainPanel.Width - MainWindow.Offset * 2;
-            int panelHeight = this.MainPanel.Height - MainWindow.Offset * 2;
+            FileAccess.Entries = FileAccess.Entries.OrderBy(entry => entry.Id).ToList();
+
+            var panelBorders = new PanelBorders();
+            panelBorders.xStart = 0 + MainWindow.Offset; panelBorders.yStart = 0 + MainWindow.Offset;
+            panelBorders.xEnd = this.MainPanel.Width; panelBorders.yEnd = this.MainPanel.Width;
 
             int x = (int)(20 * MainWindow.Scaling);
             int y = (int)((20 * MainWindow.Scaling) * MainWindow.Ratio);
 
-            int perRow = (int)System.Math.Floor((double)(panelWidth / (x + MainWindow.Offset)));
-            int buttonCounter = 0;
+            int perRow = (int)System.Math.Floor((double)((panelBorders.xEnd - panelBorders.xStart) / (x + MainWindow.Offset)));
 
-            int startX = 0;
-            int startY = 0;
+            Point previousStart = new Point(0, 0);
+            Point previousEnd = new Point(0, 0);
+
+            int buttonCounter = 1;
+            int rowCounter = 0;
+            FileAccess.Entries.ForEach(
+               entry =>
+               {    // Last one in row!
+                   if (buttonCounter == perRow && perRow != 1)
+                   {
+                       entry.locationStart = new Point(previousEnd.X + MainWindow.Offset, MainWindow.Offset + (rowCounter * (x + MainWindow.Offset)));
+                       entry.locationEnd = new Point(entry.locationStart.X + x, entry.locationStart.Y + y);
+
+                       // Reset the row!
+                       rowCounter++;
+
+                       panelBorders.xStart = 0 + MainWindow.Offset; panelBorders.yStart = MainWindow.Offset + (rowCounter * (x + MainWindow.Offset));
+
+                       buttonCounter = 1;
+                   }
+                   else if (buttonCounter == 1)
+                   {
+                       entry.locationStart = new Point(panelBorders.xStart, panelBorders.yStart);
+                       entry.locationEnd = new Point(entry.locationStart.X + x, entry.locationStart.Y + y);
+
+                       previousStart = entry.locationStart;
+                       previousEnd = entry.locationEnd;
+
+                       buttonCounter++;
+                   }
+                   else if (buttonCounter < perRow)
+                   {
+                       entry.locationStart = new Point(previousEnd.X + MainWindow.Offset, MainWindow.Offset + (rowCounter * (x + MainWindow.Offset)));
+                       entry.locationEnd = new Point(entry.locationStart.X + x, entry.locationStart.Y + y);
+
+                       previousStart = entry.locationStart;
+                       previousEnd = entry.locationEnd;
+
+                       buttonCounter++;
+                   }
+               });
 
             FileAccess.Entries.ForEach(
                 entry =>
                 {
-                    // Starting on new row...
-                    if (buttonCounter > perRow)
-                    {
-                        startX = 0; startY += y; buttonCounter = 0;
-                    }
-                    // Last row...
-                    else if (buttonCounter == perRow)
-                    {
-                        entry.GraphicsButton.Location = new Point(startX + MainWindow.Offset, startY + MainWindow.Offset);
-                        entry.GraphicsButton.Text = entry.Sign;
-                        entry.GraphicsButton.Size = new Size(x, y);
-                        this.MainPanel.Controls.Add(entry.GraphicsButton);
-
-                        buttonCounter++;
-                    }
-                    else // We are somewhere else in the row...
-                    {
-                        entry.GraphicsButton.Location = new Point(startX + MainWindow.Offset, startY + MainWindow.Offset);
-                        entry.GraphicsButton.Text = entry.Sign;
-                        entry.GraphicsButton.Size = new Size(x, y);
-                        this.MainPanel.Controls.Add(entry.GraphicsButton);
-                        // TODO: fix the ugly gap at the end
-                        startX += x; buttonCounter++;
-                    }
+                    entry.GraphicsButton.Location = entry.locationStart;
+                    entry.GraphicsButton.Text = entry.Sign;
+                    entry.GraphicsButton.Size = new Size(entry.locationEnd.X - entry.locationStart.X, entry.locationEnd.Y - entry.locationStart.Y);
+                    this.MainPanel.Controls.Add(entry.GraphicsButton);
                 });
         }
 
@@ -101,11 +129,39 @@ namespace SignBrowser
         private void AddButton_Click(object sender, EventArgs e)
         {
             var addWindow = new AddWindow();
-            //TODO: Add positioning to the window to open it on top of this one.
             addWindow.StartPosition = FormStartPosition.CenterParent;
             this.Enabled = false;
             addWindow.FormClosed += (o, e) => { this.Focus(); this.Enabled = true; this.RedrawPanel(); };
             addWindow.ShowDialog();
+        }
+
+        private void ScalingTrackbar_Scroll(object sender, EventArgs e)
+        {
+            MainWindow.Scaling = (float)this.ScalingTrackbar.Value / 10F;
+            this.ScalingLabel.Text = "Scaling: " + MainWindow.Scaling.ToString();
+            this.RedrawPanel();
+        }
+
+        private void RatioTrackbar_Scroll(object sender, EventArgs e)
+        {
+            MainWindow.Ratio = (float)this.RatioTrackbar.Value / 10F;
+            this.RatioLabel.Text = "Ratio: " + MainWindow.Ratio.ToString();
+            this.RedrawPanel();
+        }
+
+        private void OffsetTrackbar_Scroll(object sender, EventArgs e)
+        {
+            MainWindow.Offset = this.OffsetTrackbar.Value;
+            this.OffsetLabel.Text = "Offset: " + MainWindow.Offset.ToString();
+            this.RedrawPanel();
+        }
+
+        public struct PanelBorders
+        {
+            public int xStart;
+            public int yStart;
+            public int xEnd;
+            public int yEnd;
         }
     }
 }

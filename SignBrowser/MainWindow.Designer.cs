@@ -35,6 +35,15 @@ namespace SignBrowser
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.UndertextLabel = new System.Windows.Forms.Label();
+            this.ScalingTrackbar = new System.Windows.Forms.TrackBar();
+            this.RatioTrackbar = new System.Windows.Forms.TrackBar();
+            this.OffsetTrackbar = new System.Windows.Forms.TrackBar();
+            this.ScalingLabel = new System.Windows.Forms.Label();
+            this.RatioLabel = new System.Windows.Forms.Label();
+            this.OffsetLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.ScalingTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RatioTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OffsetTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // HeaderLabel
@@ -59,11 +68,11 @@ namespace SignBrowser
             // 
             // MainPanel
             // 
-            this.MainPanel.AutoSize = true;
+            this.MainPanel.AutoScroll = true;
             this.MainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MainPanel.Location = new System.Drawing.Point(10, 75);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(519, 450);
+            this.MainPanel.Size = new System.Drawing.Size(402, 450);
             this.MainPanel.TabIndex = 2;
             // 
             // AddButton
@@ -96,11 +105,79 @@ namespace SignBrowser
             this.UndertextLabel.TabIndex = 4;
             this.UndertextLabel.Text = "© Copyright Andrew Coachman 2021, all rights included";
             // 
+            // ScalingTrackbar
+            // 
+            this.ScalingTrackbar.LargeChange = 2;
+            this.ScalingTrackbar.Location = new System.Drawing.Point(426, 125);
+            this.ScalingTrackbar.Maximum = 50;
+            this.ScalingTrackbar.Minimum = 10;
+            this.ScalingTrackbar.Name = "ScalingTrackbar";
+            this.ScalingTrackbar.Size = new System.Drawing.Size(104, 45);
+            this.ScalingTrackbar.TabIndex = 5;
+            this.ScalingTrackbar.Value = 10;
+            this.ScalingTrackbar.Scroll += new System.EventHandler(this.ScalingTrackbar_Scroll);
+            // 
+            // RatioTrackbar
+            // 
+            this.RatioTrackbar.LargeChange = 2;
+            this.RatioTrackbar.Location = new System.Drawing.Point(426, 187);
+            this.RatioTrackbar.Maximum = 20;
+            this.RatioTrackbar.Minimum = 1;
+            this.RatioTrackbar.Name = "RatioTrackbar";
+            this.RatioTrackbar.Size = new System.Drawing.Size(104, 45);
+            this.RatioTrackbar.TabIndex = 5;
+            this.RatioTrackbar.Value = 1;
+            this.RatioTrackbar.Scroll += new System.EventHandler(this.RatioTrackbar_Scroll);
+            // 
+            // OffsetTrackbar
+            // 
+            this.OffsetTrackbar.Location = new System.Drawing.Point(426, 247);
+            this.OffsetTrackbar.Maximum = 25;
+            this.OffsetTrackbar.Minimum = 5;
+            this.OffsetTrackbar.Name = "OffsetTrackbar";
+            this.OffsetTrackbar.Size = new System.Drawing.Size(104, 45);
+            this.OffsetTrackbar.TabIndex = 5;
+            this.OffsetTrackbar.Value = 5;
+            this.OffsetTrackbar.Scroll += new System.EventHandler(this.OffsetTrackbar_Scroll);
+            // 
+            // ScalingLabel
+            // 
+            this.ScalingLabel.AutoSize = true;
+            this.ScalingLabel.Location = new System.Drawing.Point(426, 104);
+            this.ScalingLabel.Name = "ScalingLabel";
+            this.ScalingLabel.Size = new System.Drawing.Size(48, 15);
+            this.ScalingLabel.TabIndex = 6;
+            this.ScalingLabel.Text = "Scaling:";
+            // 
+            // RatioLabel
+            // 
+            this.RatioLabel.AutoSize = true;
+            this.RatioLabel.Location = new System.Drawing.Point(426, 169);
+            this.RatioLabel.Name = "RatioLabel";
+            this.RatioLabel.Size = new System.Drawing.Size(37, 15);
+            this.RatioLabel.TabIndex = 6;
+            this.RatioLabel.Text = "Ratio:";
+            // 
+            // OffsetLabel
+            // 
+            this.OffsetLabel.AutoSize = true;
+            this.OffsetLabel.Location = new System.Drawing.Point(426, 229);
+            this.OffsetLabel.Name = "OffsetLabel";
+            this.OffsetLabel.Size = new System.Drawing.Size(42, 15);
+            this.OffsetLabel.TabIndex = 6;
+            this.OffsetLabel.Text = "Offset:";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 545);
+            this.Controls.Add(this.OffsetLabel);
+            this.Controls.Add(this.RatioLabel);
+            this.Controls.Add(this.ScalingLabel);
+            this.Controls.Add(this.OffsetTrackbar);
+            this.Controls.Add(this.RatioTrackbar);
+            this.Controls.Add(this.ScalingTrackbar);
             this.Controls.Add(this.UndertextLabel);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.AddButton);
@@ -109,6 +186,9 @@ namespace SignBrowser
             this.Controls.Add(this.HeaderLabel);
             this.Name = "MainWindow";
             this.Text = "Sign library";
+            ((System.ComponentModel.ISupportInitialize)(this.ScalingTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RatioTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OffsetTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,6 +202,12 @@ namespace SignBrowser
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Label UndertextLabel;
+        private System.Windows.Forms.TrackBar ScalingTrackbar;
+        private System.Windows.Forms.TrackBar RatioTrackbar;
+        private System.Windows.Forms.TrackBar OffsetTrackbar;
+        private System.Windows.Forms.Label ScalingLabel;
+        private System.Windows.Forms.Label RatioLabel;
+        private System.Windows.Forms.Label OffsetLabel;
     }
 }
 
