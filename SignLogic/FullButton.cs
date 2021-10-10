@@ -5,17 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProtoBuf;
 
 namespace SignLogic
 {
     /// <summary>
     /// Class represents one Button on the grid.
     /// </summary>
+
     public class FullButton
     {
         /// <summary>
         /// The identifier counter. Starts at one.
         /// </summary>
+
         public static int IdCounter = 1;
 
         public Button GraphicsButton;
@@ -44,16 +47,12 @@ namespace SignLogic
         }
 
         /// <summary>
-        /// Called when the button is being deleted from the form;
-        /// </summary>
-        public delegate void onDeleted();
-
-        /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>
         /// The identifier.
         /// </value>
+
         public int Id { get; set; }
 
         /// <summary>
@@ -62,6 +61,7 @@ namespace SignLogic
         /// <value>
         /// The sign.
         /// </value>
+
         public string Sign { get; set; }
 
         /// <summary>
@@ -70,6 +70,7 @@ namespace SignLogic
         /// <value>
         /// The description.
         /// </value>
+
         public string Description { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace SignBrowser
                 this.DescriptionTextbox.Text = string.Empty;
             }
             else
-                MessageBox.Show("Some of the parameters are filled in wrongly!");
+                return;
         }
 
         private bool validateForm()
@@ -53,6 +53,19 @@ namespace SignBrowser
             {
                 check = false;
             }
+
+            if (this.DescriptionTextbox.Text.Contains('\n'))
+            {
+                check = false;
+                MessageBox.Show("Description cannot contain newLine characters!");
+            }
+
+            if (this.DescriptionTextbox.Text.Contains('\r'))
+            {
+                check = false;
+                MessageBox.Show("Description cannot contain newLine characters!");
+            }
+
             return check;
         }
 

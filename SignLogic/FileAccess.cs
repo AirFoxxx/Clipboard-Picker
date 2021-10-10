@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProtoBuf;
 
 namespace SignLogic
 {
@@ -26,21 +27,6 @@ namespace SignLogic
         /// The full file path.
         /// </value>
         public static string FullFilePath { get; private set; }
-
-        /// <summary>
-        /// Writes the file.
-        /// </summary>
-        /// <returns>String to write.</returns>
-        public static string WriteFile()
-        {
-            // entry looks like this: id,sign,description[endline]
-            var str = String.Empty;
-            foreach (var button in FileAccess.Entries)
-            {
-                str = str + $"{button.Id}\r{button.Sign}\r{button.Description}\n";
-            }
-            return str;
-        }
 
         /// <summary>
         /// Adds the button to the internal Button list.
@@ -74,63 +60,71 @@ namespace SignLogic
                     {
                         var bytes = new byte[reader.Capacity];
                         reader.ReadArray<byte>(0, bytes, 0, bytes.Length);
-                        str = System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-                        str = str.Trim('\0');
-                        // System.Diagnostics.Debug.Write(str);
+                        var stream = new MemoryStream(bytes);
 
-                        if (str.Length == 0)
+                        var bc = Serializer.DeserializeWithLengthPrefix<ButtonCollection>(stream, PrefixStyle.Fixed32);
+
+                        if (bc.bList == null)
+                        {
+                            // This happens when no file exists;
                             return;
+                        }
 
-                        FileAccess.ReadFile(str);
+                        foreach (var button in bc.bList)
+                        {
+                            var b = new FullButton();
+                            b.Id = button.id;
+                            b.Sign = button.sign;
+                            b.Description = button.desc;
+                            FileAccess.Entries.Add(b);
+                        }
+
+                        stream.Close();
+                        stream.Dispose();
                     }
                     else // Write operation
                     {
-                        str = FileAccess.WriteFile();
+                        var bc = new ButtonCollection();
+                        bc.bList = new List<EasyButton>();
 
-                        if (str.Length == 0)
-                            return;
+                        foreach (var button in FileAccess.Entries)
+                        {
+                            var b = new EasyButton();
+                            b.id = button.Id;
+                            b.sign = button.Sign;
+                            b.desc = button.Description;
+                            bc.bList.Add(b);
+                        }
 
-                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
-                        reader.WriteArray<byte>(0, buffer, 0, buffer.Length);
+                        var stream = new MemoryStream();
+                        Serializer.SerializeWithLengthPrefix<ButtonCollection>(stream, bc, PrefixStyle.Fixed32);
+                        byte[] output = stream.ToArray();
+                        reader.WriteArray<byte>(0, output, 0, output.Length);
+                        stream.Close();
+                        stream.Dispose();
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// Reads the file contents.
-        /// </summary>
-        /// <param name="str">The string.</param>
-        /// <exception cref="System.Exception">Error in the saving file!</exception>
-        private static void ReadFile(string str)
+        [ProtoContract]
+        public partial class EasyButton
         {
-            // entry looks like this: id,sign,description[endline]
-            var buttonsList = str.Split(new char[] { '\n' }).ToList();
+            [ProtoMember(1)]
+            public int id;
 
-            foreach (var button in buttonsList)
-            {
-                if (button == string.Empty)
-                {
-                    if (FileAccess.Entries.Count == 0)
-                    {
-                        FullButton.IdCounter = 1;
-                    }
-                    continue;
-                }
+            [ProtoMember(2)]
+            public string sign;
 
-                var buttonStrings = button.Split('\r').ToList();
+            [ProtoMember(3)]
+            public string desc;
+        }
 
-                if (buttonStrings.Count() != 3)
-                    throw new Exception("Error in the saving file!");
-
-                var newButton = new FullButton();
-                newButton.Id = int.Parse(buttonStrings[0]);
-                newButton.Sign = buttonStrings[1];
-                newButton.Description = buttonStrings[2];
-
-                FileAccess.Entries.Add(newButton);
-                FullButton.IdCounter = newButton.Id + 1;
-            }
+        [ProtoContract]
+        public partial class ButtonCollection
+        {
+            [ProtoMember(1)]
+            public List<EasyButton> bList;
         }
     }
 }

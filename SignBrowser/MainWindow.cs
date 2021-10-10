@@ -15,7 +15,6 @@ namespace SignBrowser
     {
         public MainWindow()
         {
-            //TODO: Add button description somewhere on the form (with lambdas if that works?)
             InitializeComponent();
 
             this.DescriptionTextbox.Text = "Please click" +

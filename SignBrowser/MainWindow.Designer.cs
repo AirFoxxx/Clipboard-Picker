@@ -29,6 +29,7 @@ namespace SignBrowser
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.HeaderLabel = new System.Windows.Forms.Label();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -196,6 +197,7 @@ namespace SignBrowser
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.HeaderLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.Text = "Sign library";
             ((System.ComponentModel.ISupportInitialize)(this.ScalingTrackbar)).EndInit();
