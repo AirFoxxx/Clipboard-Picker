@@ -7,7 +7,9 @@ The special character gets copied into your clipboard when you click on the butt
 
 ## The Interface
 
-![image](image1.png)
+<p>
+    <img src="image1.png" width="220" height="240" />
+</p>
 
 The buttons can be resized in many ways with the sliders to create the right conditions to copy easily.
 
