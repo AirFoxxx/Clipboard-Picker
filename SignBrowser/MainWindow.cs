@@ -18,6 +18,10 @@ namespace SignBrowser
             //TODO: Add button description somewhere on the form (with lambdas if that works?)
             InitializeComponent();
 
+            this.DescriptionTextbox.Text = "Please click" +
+                " on a button you want to copy the" +
+                " sign from!";
+
             this.ScalingTrackbar.Value = 30;
             MainWindow.Scaling = this.ScalingTrackbar.Value / 10;
             this.ScalingLabel.Text = "Scaling: " + MainWindow.Scaling.ToString();
@@ -29,6 +33,15 @@ namespace SignBrowser
             this.OffsetTrackbar.Value = 5;
             MainWindow.Offset = this.OffsetTrackbar.Value;
             this.OffsetLabel.Text = "Offset: " + MainWindow.Offset.ToString();
+
+            // What happens when button is clicked:
+            FileAccess.Entries.ForEach(entry => entry.GraphicsButton.Click += (o, e) =>
+            {
+                this.DescriptionTextbox.Text = "Selected sign: " +
+                entry.Sign + " \n" +
+                "Description: \n" +
+                entry.Description;
+            });
 
             this.RedrawPanel();
         }
