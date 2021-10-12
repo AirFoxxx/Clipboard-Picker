@@ -199,7 +199,7 @@ namespace SignBrowser
             this.Controls.Add(this.HeaderLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
-            this.Text = "Sign library";
+            this.Text = "ClipBoard library";
             ((System.ComponentModel.ISupportInitialize)(this.ScalingTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatioTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OffsetTrackbar)).EndInit();

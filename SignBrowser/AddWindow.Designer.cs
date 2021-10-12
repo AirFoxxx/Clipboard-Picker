@@ -29,6 +29,7 @@ namespace SignBrowser
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddWindow));
             this.IdLabel = new System.Windows.Forms.Label();
             this.SignLabel = new System.Windows.Forms.Label();
             this.DescriptionLabel = new System.Windows.Forms.Label();
@@ -113,6 +114,7 @@ namespace SignBrowser
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.SignLabel);
             this.Controls.Add(this.IdLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddWindow";
             this.Text = "Add button";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddWindow_FormClosed);

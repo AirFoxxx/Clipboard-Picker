@@ -29,6 +29,7 @@ namespace SignBrowser
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RemoveWindow));
             this.RemoveLabel = new System.Windows.Forms.Label();
             this.SignTextbox = new System.Windows.Forms.TextBox();
             this.RecursiveCheckbox = new System.Windows.Forms.CheckBox();
@@ -80,6 +81,7 @@ namespace SignBrowser
             this.Controls.Add(this.RecursiveCheckbox);
             this.Controls.Add(this.SignTextbox);
             this.Controls.Add(this.RemoveLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RemoveWindow";
             this.Text = "Remove button";
             this.ResumeLayout(false);
