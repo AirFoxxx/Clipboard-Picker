@@ -86,11 +86,12 @@ namespace SignLogic
                     {
                         var bc = new ButtonCollection();
                         bc.bList = new List<EasyButton>();
+                        int indexFix = 1;
 
                         foreach (var button in FileAccess.Entries)
                         {
                             var b = new EasyButton();
-                            b.id = button.Id;
+                            b.id = indexFix++;
                             b.sign = button.Sign;
                             b.desc = button.Description;
                             bc.bList.Add(b);

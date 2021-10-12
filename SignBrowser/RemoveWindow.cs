@@ -62,6 +62,10 @@ namespace SignBrowser
                 " Button/s.");
                 this.SignTextbox.Text = string.Empty;
                 this.RecursiveCheckbox.Checked = false;
+
+                // recalculate IDs.
+                int indexFix = 1;
+                FileAccess.Entries.ForEach(entry => entry.Id = indexFix++);
             }
         }
 
