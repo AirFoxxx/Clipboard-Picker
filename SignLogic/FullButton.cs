@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -43,6 +44,12 @@ namespace SignLogic
             this.Description = buttonDesc;
 
             this.GraphicsButton = new Button();
+
+            // Color assignment
+            int randomNumber1 = IntUtil.Random(200, 255);
+            int randomNumber2 = IntUtil.Random(200, 255);
+            int randomNumber3 = IntUtil.Random(200, 255);
+            this.GraphicsButton.BackColor = Color.FromArgb(randomNumber1, randomNumber2, randomNumber3);
         }
 
         /// <summary>

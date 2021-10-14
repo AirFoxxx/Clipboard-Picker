@@ -102,7 +102,7 @@ namespace SignBrowser
             this.UndertextLabel.AutoSize = true;
             this.UndertextLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.UndertextLabel.ForeColor = System.Drawing.Color.Gray;
-            this.UndertextLabel.Location = new System.Drawing.Point(53, 528);
+            this.UndertextLabel.Location = new System.Drawing.Point(115, 528);
             this.UndertextLabel.Name = "UndertextLabel";
             this.UndertextLabel.Size = new System.Drawing.Size(297, 13);
             this.UndertextLabel.TabIndex = 4;
@@ -183,6 +183,7 @@ namespace SignBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(542, 545);
             this.Controls.Add(this.DescriptionTextbox);
             this.Controls.Add(this.OffsetLabel);
@@ -197,6 +198,7 @@ namespace SignBrowser
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.HeaderLabel);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.Text = "ClipBoard library";
