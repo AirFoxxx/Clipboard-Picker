@@ -33,6 +33,10 @@ namespace SignBrowser
             MainWindow.Offset = this.OffsetTrackbar.Value;
             this.OffsetLabel.Text = "Offset: " + MainWindow.Offset.ToString();
 
+            this.ColorTrackbar.Value = 200;
+            MainWindow.ColorDepth = this.ColorTrackbar.Value;
+            this.ColorLabel.Text = "Color Depth: " + MainWindow.ColorDepth.ToString();
+
             this.RedrawPanel();
         }
 
@@ -43,6 +47,14 @@ namespace SignBrowser
         /// The scaling.
         /// </value>
         public static float Scaling { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color depth.
+        /// </summary>
+        /// <value>
+        /// The color depth.
+        /// </value>
+        public static int ColorDepth { get; set; }
 
         /// <summary>
         /// Gets or sets the ratio of buttons, width is always 1, so if ratio is 2.0F then height is double the width.
@@ -71,6 +83,16 @@ namespace SignBrowser
                 entry.Description;
                 System.Windows.Forms.Clipboard.SetText(entry.Sign);
             });
+
+            FileAccess.Entries.ForEach(
+                entry =>
+                {
+                    // Color assignment
+                    int randomNumber1 = IntUtil.Random(MainWindow.ColorDepth, 255);
+                    int randomNumber2 = IntUtil.Random(MainWindow.ColorDepth, 255);
+                    int randomNumber3 = IntUtil.Random(MainWindow.ColorDepth, 255);
+                    entry.GraphicsButton.BackColor = Color.FromArgb(randomNumber1, randomNumber2, randomNumber3);
+                });
 
             FileAccess.Entries = FileAccess.Entries.OrderBy(entry => entry.Id).ToList();
 
@@ -162,6 +184,13 @@ namespace SignBrowser
             this.RedrawPanel();
         }
 
+        private void ColorTrackbar_Scroll(object sender, EventArgs e)
+        {
+            MainWindow.ColorDepth = this.ColorTrackbar.Value;
+            this.ColorLabel.Text = "Color Depth: " + this.ColorTrackbar.Value.ToString();
+            this.RedrawPanel();
+        }
+
         private void OffsetTrackbar_Scroll(object sender, EventArgs e)
         {
             MainWindow.Offset = this.OffsetTrackbar.Value;
@@ -176,6 +205,10 @@ namespace SignBrowser
             this.Enabled = false;
             removeWindow.FormClosed += (o, e) => { this.Focus(); this.Enabled = true; this.RedrawPanel(); };
             removeWindow.ShowDialog();
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
         }
 
         public struct PanelBorders

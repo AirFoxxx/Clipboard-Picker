@@ -43,9 +43,12 @@ namespace SignBrowser
             this.RatioLabel = new System.Windows.Forms.Label();
             this.OffsetLabel = new System.Windows.Forms.Label();
             this.DescriptionTextbox = new System.Windows.Forms.TextBox();
+            this.ColorLabel = new System.Windows.Forms.Label();
+            this.ColorTrackbar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.ScalingTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatioTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OffsetTrackbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // HeaderLabel
@@ -111,19 +114,20 @@ namespace SignBrowser
             // ScalingTrackbar
             // 
             this.ScalingTrackbar.LargeChange = 2;
-            this.ScalingTrackbar.Location = new System.Drawing.Point(426, 125);
+            this.ScalingTrackbar.Location = new System.Drawing.Point(418, 165);
             this.ScalingTrackbar.Maximum = 50;
             this.ScalingTrackbar.Minimum = 10;
             this.ScalingTrackbar.Name = "ScalingTrackbar";
             this.ScalingTrackbar.Size = new System.Drawing.Size(113, 45);
             this.ScalingTrackbar.TabIndex = 5;
+            this.ScalingTrackbar.TickFrequency = 2;
             this.ScalingTrackbar.Value = 10;
             this.ScalingTrackbar.Scroll += new System.EventHandler(this.ScalingTrackbar_Scroll);
             // 
             // RatioTrackbar
             // 
             this.RatioTrackbar.LargeChange = 2;
-            this.RatioTrackbar.Location = new System.Drawing.Point(426, 187);
+            this.RatioTrackbar.Location = new System.Drawing.Point(418, 227);
             this.RatioTrackbar.Maximum = 20;
             this.RatioTrackbar.Minimum = 1;
             this.RatioTrackbar.Name = "RatioTrackbar";
@@ -134,7 +138,7 @@ namespace SignBrowser
             // 
             // OffsetTrackbar
             // 
-            this.OffsetTrackbar.Location = new System.Drawing.Point(426, 247);
+            this.OffsetTrackbar.Location = new System.Drawing.Point(418, 287);
             this.OffsetTrackbar.Maximum = 25;
             this.OffsetTrackbar.Minimum = 5;
             this.OffsetTrackbar.Name = "OffsetTrackbar";
@@ -146,7 +150,7 @@ namespace SignBrowser
             // ScalingLabel
             // 
             this.ScalingLabel.AutoSize = true;
-            this.ScalingLabel.Location = new System.Drawing.Point(426, 104);
+            this.ScalingLabel.Location = new System.Drawing.Point(426, 144);
             this.ScalingLabel.Name = "ScalingLabel";
             this.ScalingLabel.Size = new System.Drawing.Size(48, 15);
             this.ScalingLabel.TabIndex = 6;
@@ -155,7 +159,7 @@ namespace SignBrowser
             // RatioLabel
             // 
             this.RatioLabel.AutoSize = true;
-            this.RatioLabel.Location = new System.Drawing.Point(426, 169);
+            this.RatioLabel.Location = new System.Drawing.Point(426, 209);
             this.RatioLabel.Name = "RatioLabel";
             this.RatioLabel.Size = new System.Drawing.Size(37, 15);
             this.RatioLabel.TabIndex = 6;
@@ -164,7 +168,7 @@ namespace SignBrowser
             // OffsetLabel
             // 
             this.OffsetLabel.AutoSize = true;
-            this.OffsetLabel.Location = new System.Drawing.Point(426, 229);
+            this.OffsetLabel.Location = new System.Drawing.Point(426, 269);
             this.OffsetLabel.Name = "OffsetLabel";
             this.OffsetLabel.Size = new System.Drawing.Size(42, 15);
             this.OffsetLabel.TabIndex = 6;
@@ -172,12 +176,36 @@ namespace SignBrowser
             // 
             // DescriptionTextbox
             // 
-            this.DescriptionTextbox.Location = new System.Drawing.Point(426, 298);
+            this.DescriptionTextbox.Location = new System.Drawing.Point(426, 330);
             this.DescriptionTextbox.Multiline = true;
             this.DescriptionTextbox.Name = "DescriptionTextbox";
             this.DescriptionTextbox.ReadOnly = true;
-            this.DescriptionTextbox.Size = new System.Drawing.Size(104, 227);
+            this.DescriptionTextbox.Size = new System.Drawing.Size(104, 195);
             this.DescriptionTextbox.TabIndex = 7;
+            // 
+            // ColorLabel
+            // 
+            this.ColorLabel.AutoSize = true;
+            this.ColorLabel.Location = new System.Drawing.Point(426, 84);
+            this.ColorLabel.Name = "ColorLabel";
+            this.ColorLabel.Size = new System.Drawing.Size(73, 15);
+            this.ColorLabel.TabIndex = 6;
+            this.ColorLabel.Text = "Color depth:";
+            this.ColorLabel.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // ColorTrackbar
+            // 
+            this.ColorTrackbar.LargeChange = 20;
+            this.ColorTrackbar.Location = new System.Drawing.Point(418, 102);
+            this.ColorTrackbar.Maximum = 255;
+            this.ColorTrackbar.Minimum = 1;
+            this.ColorTrackbar.Name = "ColorTrackbar";
+            this.ColorTrackbar.Size = new System.Drawing.Size(113, 45);
+            this.ColorTrackbar.SmallChange = 10;
+            this.ColorTrackbar.TabIndex = 5;
+            this.ColorTrackbar.TickFrequency = 12;
+            this.ColorTrackbar.Value = 200;
+            this.ColorTrackbar.Scroll += new System.EventHandler(this.ColorTrackbar_Scroll);
             // 
             // MainWindow
             // 
@@ -188,8 +216,10 @@ namespace SignBrowser
             this.Controls.Add(this.DescriptionTextbox);
             this.Controls.Add(this.OffsetLabel);
             this.Controls.Add(this.RatioLabel);
+            this.Controls.Add(this.ColorLabel);
             this.Controls.Add(this.ScalingLabel);
             this.Controls.Add(this.OffsetTrackbar);
+            this.Controls.Add(this.ColorTrackbar);
             this.Controls.Add(this.RatioTrackbar);
             this.Controls.Add(this.ScalingTrackbar);
             this.Controls.Add(this.UndertextLabel);
@@ -205,6 +235,7 @@ namespace SignBrowser
             ((System.ComponentModel.ISupportInitialize)(this.ScalingTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatioTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OffsetTrackbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,6 +256,8 @@ namespace SignBrowser
         private System.Windows.Forms.Label RatioLabel;
         private System.Windows.Forms.Label OffsetLabel;
         private System.Windows.Forms.TextBox DescriptionTextbox;
+        private System.Windows.Forms.Label ColorLabel;
+        private System.Windows.Forms.TrackBar ColorTrackbar;
     }
 }
 
